@@ -1,0 +1,30 @@
+.container {
+    box-sizing: border-box;
+    width: 1000px;
+    height: 480px;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 30px 60px;
+    display: flex;
+    position: absolute;
+}
+.external-link-wrapper {
+    margin: 0 auto;
+}
+.next-button {
+    background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+    border-radius: 9px;
+    font-size: 18px;
+    color: #ffffff;
+    padding: 10px 42px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+.link-description {
+    font-size: 20px;
+}
+.weblink {
+    font-size: 24px;
+}

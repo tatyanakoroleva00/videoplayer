@@ -23,7 +23,7 @@ export default function Player() {
     useEffect(() => {
         fetch('http://quiz.site/edit-videocourse-handler', {
           method: 'POST',
-          body: JSON.stringify(Math.floor(902))
+          body: JSON.stringify(new URL(window.location).searchParams.get('courseId'))
       })
           .then(response => response.json())
           .then(data => {

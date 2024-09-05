@@ -8,13 +8,11 @@ import Interactives from './Interactives';
 
 export default function Player() {
     const player = useRef(null);
-    const player2 = useRef(null);
     const interval = useRef(null);
     const [currentTime, setCurrentTime] = useState(0);
     const [progress, setProgress] = useState(0);
     const [maxTime, setMaxTime] = useState(0);
     const [videoswitch, setVideoSwitch] = useState(true);
-    const [videoHeading, setVideoHeading] = useState('');
     const [interactiveIsShown, setInteractiveIsShown] = useState(false);
     const [timeCode, setTimeCode] = useState();
     const [videoData, setVideoData] = useState({});

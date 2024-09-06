@@ -83,7 +83,6 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode}) 
         <p>Результат: {result} </p>
         <button className={styles['next-button']} onClick={click}>Продолжить</button>
         </>}
-        
       </div>
     </div>
   )

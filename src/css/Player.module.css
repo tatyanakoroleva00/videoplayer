@@ -4,20 +4,20 @@
     margin: 0 auto;
     width: 1000px;
     height: 550px;
-    /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(30,133,74,1) 35%, rgba(28,138,85,1) 39%, rgba(0,212,255,1) 100%); */
-    /* background-color: black; */
     border: 1px solid black;
     margin-top: 2rem;
     position: relative;
     margin-bottom: 5rem;
 }
-
 .video-preview {
     width: 100%;
     height: 550px;
 }
+/* .video-player {
+
+} */
 .btn {
-    /* padding: 10px 20px;
+    padding: 10px 20px;
     background-color: rgb(155, 145, 146);
     border: 1px solid gray;
     border-radius: 5%;
@@ -25,7 +25,7 @@
     right: 1rem;
     /* bottom: 50px; */
     position: absolute;
-    opacity: 0.9; */
+    opacity: 0.9;
 }
 .btn:hover {
     opacity: 1;
@@ -38,58 +38,20 @@
 }
 .interactive {
     position: absolute;
+    z-index: 999;
     height: 300px;
 }
-.episode-line {
-    display: flex;
-    margin: 0 auto;
-    width: 100%;
-    height: 50px;
-    background: rgb(0, 0, 0);
-    position: absolute;
-    bottom: 0;
-}
-.episode {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: 1px solid rgb(255, 255, 255);
-    padding-left: 5px;
-    padding-right: 5px;
-    cursor: pointer;
-    color: white;
-    opacity: 0.9;
-}
-.episode:hover {
-    opacity: 1;
-}
-.toolbar-wrapper {
-    display: flex;
-    align-items: center;
-    width: 90%;
-    position: absolute;
-    left: 10px;
-    bottom: 0;
-    height: 60px;
-    gap: 1rem;
-    /* background-color: black; */
-}
-.play-btn, .pause-btn {
-    width: 30px;
-    height: 30px;
-}
-.slider-wrapper {
-    width: 70%;
-    height: 20px;
-    bottom: 0;
-    background-color: rgba(182, 182, 182, 0.219);
-}
+
 .interactives-line {
-    width: 70%;
+    width: 970px;
+    /* background-color: green; */
     z-index: 999;
     position: absolute;
-    display: flex;
-    background-color: green;
+    left: 15px;
+    display: flex; 
+    /* background-color: rgba(0, 128, 0, 0); */
+    height: 1rem;
+    bottom: 0rem;
 }
 .first {
     display: block;
@@ -99,9 +61,11 @@
     cursor: pointer;
     border-radius: 50%;
     position: absolute;
-    left: 30px;
-    bottom: 5px;
+    /* left: 30px; */
+    /* bottom: 5px; */
+    /* bottom: 0.4rem; */
     border: 1px solid black;
+    background-color: rgb(255, 255, 255);
 }
 .video-heading-wrapper {
     box-sizing: border-box;

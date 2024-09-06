@@ -5,7 +5,15 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr}) 
 
   let data = {};
   for (let elem of interactivesArr) {
-      if(Math.floor(timeCode) == elem['time_code']) {
+
+    let episodeTime = elem['time_code'];
+    let timeSplitted = episodeTime.split(':');
+    let minutes = Math.floor(+timeSplitted[0]);
+    let secondsInMinutes = minutes * 60;
+    let seconds = Math.floor(+timeSplitted[1]);
+    let resultTime = secondsInMinutes + seconds;
+
+    if (Math.floor(timeCode) == resultTime) {
           data = elem;
           console.log(elem['receivedInfo'], 'elem');
       }
@@ -96,6 +104,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr}) 
     <div className="quiz-container">
       {!showResult ? (
         <div>
+          <div><button className={'hide-interactive-btn'} onClick={click}> X </button></div>
           <div>
             <span className="active-question-no">{addLeadingZero(activeQuestion + 1)}</span>
             <span className="total-question">/{addLeadingZero(questions.length)}</span>
@@ -112,7 +121,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr}) 
             ))}
           </ul>
           <div className="flex-right">
-            <button onClick={onClickNext} disabled={selectedAnswerIndex === null}>
+            <button className='next-btn' onClick={onClickNext} disabled={selectedAnswerIndex === null}>
               {activeQuestion === questions.length - 1 ? 'Завершить' : 'Далее'}
             </button>
           </div>
@@ -132,7 +141,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr}) 
           <p>
             Неправильные ответы:<span> {result.wrongAnswers}</span>
           </p>
-          <button onClick={click}>Продолжить</button>
+          <button className='continue-btn' onClick={click}>Продолжить</button>
         </div>
       )}
     </div>

@@ -4,9 +4,15 @@ export default function InteractiveExtLink({ click, interactivesArr, timeCode })
 
     let data = {};
     for (let elem of interactivesArr) {
-        if(Math.floor(timeCode) == elem['time_code']) {
+        let episodeTime = elem['time_code'];
+        let timeSplitted = episodeTime.split(':');
+        let minutes = Math.floor(+timeSplitted[0]);
+        let secondsInMinutes = minutes * 60;
+        let seconds = Math.floor(+timeSplitted[1]);
+        let resultTime = secondsInMinutes + seconds;
+
+        if (Math.floor(timeCode) == resultTime) {
             data = elem;
-            // console.log(elem['receivedInfo'], 'elem');
         }
     }
 

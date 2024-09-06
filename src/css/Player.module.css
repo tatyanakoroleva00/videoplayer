@@ -5,7 +5,7 @@
     width: 1000px;
     height: 550px;
     /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(30,133,74,1) 35%, rgba(28,138,85,1) 39%, rgba(0,212,255,1) 100%); */
-    background-color: black;
+    /* background-color: black; */
     border: 1px solid black;
     margin-top: 2rem;
     position: relative;
@@ -17,7 +17,7 @@
     height: 550px;
 }
 .btn {
-    padding: 10px 20px;
+    /* padding: 10px 20px;
     background-color: rgb(155, 145, 146);
     border: 1px solid gray;
     border-radius: 5%;
@@ -25,7 +25,7 @@
     right: 1rem;
     /* bottom: 50px; */
     position: absolute;
-    opacity: 0.9;
+    opacity: 0.9; */
 }
 .btn:hover {
     opacity: 1;
@@ -35,6 +35,10 @@
 }
 .visible {
     display: block;
+}
+.interactive {
+    position: absolute;
+    height: 300px;
 }
 .episode-line {
     display: flex;
@@ -102,7 +106,7 @@
 .video-heading-wrapper {
     box-sizing: border-box;
     width: 1000px;
-    height: 480px;
+    height: 400px;
     background: #ffffffe0;
     border-radius: 4px;
     padding: 30px 60px;

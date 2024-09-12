@@ -1,0 +1,39 @@
+#test-container {
+    position: relative;
+    width: 1000px;
+    height: 800px;
+}
+.bottom-overlay-min-size {
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+}
+.bottom-overlay-max-size {
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+}
+#top-overlay {
+    position: absolute;
+    z-index: 999;
+    /* display: none; */
+}
+#videoPlayer {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+#fullscreen-toggle-btn {
+    position: absolute;
+    bottom: 4%;
+    right: 5%;
+    z-index: 999;
+    border-radius: 40%;
+    padding: 0.5rem 0.8rem;
+}

@@ -14,6 +14,7 @@ export default function Player2() {
     const [pixels, setPixels] = useState(0);
     const [width, setWidth] = useState(1000);
     const [height, setHeight] = useState(550);
+    const [fullScreen, setFullScreen] = useState(false);
 
 
     useEffect(() => {
@@ -34,7 +35,9 @@ export default function Player2() {
             setDuration(player.current?.duration);
             player.current?.addEventListener("loadeddata", handleDataLoaded);
         }
+        
     }, [player])
+
 
     const handleDataLoaded = () => {
         setDuration(player.current?.duration || 0);
@@ -52,6 +55,8 @@ export default function Player2() {
         let resultTime = secondsInMinutes + seconds;
         return resultTime;
     }
+
+   
 
     useEffect(() => {
         for (let elem of interactivesArr) {
@@ -83,40 +88,80 @@ export default function Player2() {
     let timeCodes = [];
     for (let elem of interactivesArr) {
         let resultTime = convertTime(elem['time_code']);
-        console.log(duration, 'duration');
-        let pixels = resultTime * Math.floor(900 / duration);
-        console.log(width, 'width');
-        console.log(pixels, 'pixels');
+        let pixels = resultTime * Math.floor(1250 / duration);
         timeCodes.push(pixels);
     }
 
     const showInteractive = (index) => {
         let resultTime = convertTime(interactivesArr[index]['time_code']);
         setTimeCode(resultTime);
-        // setCurrentTime(resultTime);
         setInteractiveIsShown(true);
         player.current.currentTime = resultTime + 1;
         player.current.pause();
     }
 
+    if (player?.current) {
+        let videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.addEventListener('click', function () {
+            this.requestFullscreen();
+        })
+    }
+
+    const toggleFullScreen = async () => {
+        const container = document.getElementById('video-container');
+        const fullscreenApi = container.requestFullscreen  || container.webkitRequestFullScreen
+        || container.mozRequestFullScreen
+        || container.msRequestFullscreen;
+
+        if (!document.fullscreenElement) {
+            setFullScreen(true);
+            fullscreenApi.call(container);
+        }
+
+        else {
+            setFullScreen(false);
+            document.exitFullscreen();
+        }
+
+    }
+   
+
+    if (player.current) {
+    let vid = document.getElementById("videoPlayer");
+
+    function videoTimeUpdate(e)
+    {
+        vid.setAttribute("controls","controls");
+    }
+        
+    vid.addEventListener('timeupdate', videoTimeUpdate, false);
+    }
+
+
+
 
 
     return (
-        <div className={styles.container}>
-            {/* <div className={interactiveIsShown ? styles['not-visible'] : styles.visible}> */}
-            <div className={styles['video-player']}>
-                <video id="video" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} width={width} height={height} controls />
+        <div className={styles.container} id="video-container">
+            <div className={styles['video-container']}>
+                <video id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
+                    ref={player} width={width} height={height} controls/>
             </div>
-            {/* {currentTime === 0 && <div className={styles['video-heading-wrapper']}><p className={styles['video-heading']}>{videoData.heading}</p></div>} */}
+            {currentTime === 0 && !interactiveIsShown && <div className={styles.cover}>
+                <p>{videoData.heading}</p></div>
+            }
+            <div className={styles['toggle-btn-wrapper']}>
+                <button id="fullscreen-toggle-btn" className={`${fullScreen ? styles['toggle-btn-fullscreen'] : styles['toggle-btn']}`} onClick={toggleFullScreen}></button>
+            </div>
             <div className={`${interactiveIsShown ? styles.interactive : styles['not-visible']}`}>
-                {interactiveIsShown && <Interactives timeCode={timeCode} interactivesArr={interactivesArr} click={handlePlayPauseClick} />}
-            </div> 
+                {interactiveIsShown && <Interactives fullScreen={fullScreen} timeCode={timeCode} interactivesArr={interactivesArr} click={handlePlayPauseClick} />}
+            </div>
             <div className={styles['interactives-line']}>
                 {interactivesArr?.map((elem, index) => (
                     <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: timeCodes[index] }} className={styles.first}></div>
                 ))}
             </div>
+
         </div>
     )
 }

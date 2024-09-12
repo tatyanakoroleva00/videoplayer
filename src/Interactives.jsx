@@ -2,9 +2,8 @@ import React from 'react'
 import InteractiveExtLink from './interactives_types/InteractiveExtLink';
 import InteractiveCorWords from './interactives_types/InteractiveCorWords';
 import InteractiveTesting from './interactives_types/InteractiveTesting';
-import styles from './css/Interactives.module.css';
 
-export default function Interactives({ timeCode, interactivesArr, click }) {
+export default function Interactives({ timeCode, interactivesArr, click, fullScreen }) {
 
   let interactiveType = '';
   for (let elem of interactivesArr) {
@@ -22,10 +21,10 @@ export default function Interactives({ timeCode, interactivesArr, click }) {
   }
 
   return (
-    <div className={styles['interactives_wrapper']}>
-      {interactiveType == 'externalSourceLink' && <InteractiveExtLink click={click} timeCode={timeCode} interactivesArr={interactivesArr} />}
-      {interactiveType == 'correctWordsChoice' && <InteractiveCorWords click={click} timeCode={timeCode} interactivesArr={interactivesArr} />}
-      {interactiveType == 'testing' && <InteractiveTesting click={click} timeCode={timeCode} interactivesArr={interactivesArr} />}
+    <div>
+      {interactiveType == 'externalSourceLink' && <InteractiveExtLink fullScreen={fullScreen} click={click} timeCode={timeCode} interactivesArr={interactivesArr} />}
+      {interactiveType == 'correctWordsChoice' && <InteractiveCorWords fullScreen={fullScreen} click={click} timeCode={timeCode} interactivesArr={interactivesArr} />}
+      {interactiveType == 'testing' && <InteractiveTesting fullScreen={fullScreen} click={click} timeCode={timeCode} interactivesArr={interactivesArr} />}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../css/interactive_testing.css';
 
-export default function InteractiveTesting ({click, timeCode, interactivesArr}) {
+export default function InteractiveTesting ({click, timeCode, interactivesArr, fullScreen}) {
 
   let data = {};
   for (let elem of interactivesArr) {
@@ -101,7 +101,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr}) 
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
 
   return (
-    <div className="quiz-container">
+    <div className={`${fullScreen  ? 'fullscreen-quiz-container' : 'quiz-container'}`}>
       {!showResult ? (
         <div>
           <div><button className={'hide-interactive-btn'} onClick={click}> X </button></div>

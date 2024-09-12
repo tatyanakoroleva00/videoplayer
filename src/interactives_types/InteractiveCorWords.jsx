@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../css/InteractiveCorWords.module.css';
 import { useState } from 'react';
-export default function InteractiveCorWords({click, interactivesArr, timeCode}) {
+export default function InteractiveCorWords({click, interactivesArr, timeCode, fullScreen}) {
   const [chosenWords, setChosenWords] = useState({});
 
   const [checked, setChecked] =  useState(false);
@@ -65,7 +65,7 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode}) 
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${fullScreen ? styles['fullscreen-container']: styles.container }`}>
       <div className={styles['cor-words-wrapper']}>
       <div><button className={'hide-interactive-btn'} onClick={click}> X </button></div>
         <p>{correctWordsData.task}</p>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from '../css/InteractiveExtLink.module.css';
-export default function InteractiveExtLink({ click, interactivesArr, timeCode }) {
+export default function InteractiveExtLink({fullScreen, click, interactivesArr, timeCode }) {
 
     let data = {};
     for (let elem of interactivesArr) {
@@ -17,7 +17,7 @@ export default function InteractiveExtLink({ click, interactivesArr, timeCode })
     }
 
     return (
-        <div className={styles.container} >
+        <div className={`${fullScreen ? styles['fullscreen-container'] : styles.container }`} >
             <div className={styles['external-link-wrapper']}>
                 <p className={styles['link-description']}>{data['receivedInfo']['external_source_link_description']}</p>
                 <p className={styles['weblink']}><a target="_blank" href={data['receivedInfo']['external_source_url']}>{data['receivedInfo']['external_source_url']}</a></p>

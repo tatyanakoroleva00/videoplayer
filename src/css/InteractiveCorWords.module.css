@@ -4,11 +4,19 @@
     height: 480px;
     background: #ffffff;
     border-radius: 4px;
-    /* margin-top: 100px; */
     padding: 30px 60px;
     display: flex;
     position: absolute;
 }
+.fullscreen-container {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 92vh;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 30px 60px;
+    position: absolute;
+  }
 .cor-words-wrapper {
     margin: 0 auto;
 }

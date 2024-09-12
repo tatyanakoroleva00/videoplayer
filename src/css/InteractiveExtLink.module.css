@@ -5,9 +5,20 @@
     background: #ffffff;
     border-radius: 4px;
     padding: 30px 60px;
-    display: flex;
+    /* display: flex; */
     position: absolute;
 }
+
+.fullscreen-container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 92%;
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 30px 60px;
+    position: absolute;
+  }
+  
 .external-link-wrapper {
     margin: 0 auto;
 }

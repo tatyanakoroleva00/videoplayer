@@ -109,12 +109,12 @@ export default function Player2() {
         player.current.pause();
     }
 
-    if (player?.current) {
-        let videoPlayer = document.getElementById('videoPlayer');
-        videoPlayer.addEventListener('click', function () {
-            this.requestFullscreen();
-        })
-    }
+    // if (player?.current) {
+    //     let videoPlayer = document.getElementById('videoPlayer');
+    //     videoPlayer.addEventListener('click', function () {
+    //         this.requestFullscreen();
+    //     })
+    // }
 
     const toggleFullScreen = async () => {
         const container = document.getElementById('video-container');
@@ -158,10 +158,6 @@ export default function Player2() {
         //   event.preventDefault();
         }
       }, true);
-
-   
-     
-
 
     return (
         <div className={styles.container} id="video-container">

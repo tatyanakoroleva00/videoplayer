@@ -101,7 +101,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
 
   return (
-    <div className={`${fullScreen  ? 'fullscreen-quiz-container' : 'quiz-container'}`}>
+    <div className={`${fullScreen  ? 'container-fullscreen' : 'quiz-container'}`}>
       {!showResult ? (
         <div>
           <div><button className={'hide-interactive-btn'} onClick={click}> X </button></div>

@@ -8,13 +8,13 @@
     display: flex;
     position: absolute;
 }
-.container:fullscreen {
+.container-fullscreen {
     box-sizing: border-box;
     width: 100%;
-    height: 120%;
-    background: #490707;
+    height: 100%;
+    background: #ffffff;
     border-radius: 4px;
-    padding: 30px 60px;
+    padding: 15% 30%;
     position: absolute;
 }
 .cor-words-wrapper {

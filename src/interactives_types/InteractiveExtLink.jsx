@@ -17,7 +17,7 @@ export default function InteractiveExtLink({fullScreen, click, interactivesArr, 
     }
 
     return (
-        <div className={styles.container} >
+        <div className={`${fullScreen ? styles['container-fullscreen'] : styles.container}`} >
             <div className={styles['external-link-wrapper']}>
                 <p className={styles['link-description']}>{data['receivedInfo']['external_source_link_description']}</p>
                 <p className={styles['weblink']}><a target="_blank" href={data['receivedInfo']['external_source_url']}>{data['receivedInfo']['external_source_url']}</a></p>

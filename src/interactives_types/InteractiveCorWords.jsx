@@ -66,7 +66,7 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
 
 
   return (
-    <div className={styles.container}>
+    <div className={`${fullScreen ? styles['container-fullscreen'] : styles.container}`}>
       <div className={styles['cor-words-wrapper']}>
       <div><button className={'hide-interactive-btn'} onClick={click}> X </button></div>
         <p>{correctWordsData.task}</p>

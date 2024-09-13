@@ -15,6 +15,8 @@ export default function Player2() {
     const [width, setWidth] = useState(1000);
     const [height, setHeight] = useState(550);
     const [fullScreen, setFullScreen] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [showPoster, setShowPoster] = useState(true);
 
 
     useEffect(() => {
@@ -35,7 +37,7 @@ export default function Player2() {
             setDuration(player.current?.duration);
             player.current?.addEventListener("loadeddata", handleDataLoaded);
         }
-        
+
     }, [player])
 
 
@@ -56,7 +58,14 @@ export default function Player2() {
         return resultTime;
     }
 
-   
+    if (player.current) {
+        let vid = document.getElementById('videoPlayer');
+        if (!vid.onplaying) {
+            console.log(true);
+        }
+    }
+
+
 
     useEffect(() => {
         for (let elem of interactivesArr) {
@@ -109,9 +118,9 @@ export default function Player2() {
 
     const toggleFullScreen = async () => {
         const container = document.getElementById('video-container');
-        const fullscreenApi = container.requestFullscreen  || container.webkitRequestFullScreen
-        || container.mozRequestFullScreen
-        || container.msRequestFullscreen;
+        const fullscreenApi = container.requestFullscreen || container.webkitRequestFullScreen
+            || container.mozRequestFullScreen
+            || container.msRequestFullscreen;
 
         if (!document.fullscreenElement) {
             setFullScreen(true);
@@ -124,20 +133,36 @@ export default function Player2() {
         }
 
     }
-   
+
 
     if (player.current) {
-    let vid = document.getElementById("videoPlayer");
+        let vid = document.getElementById("videoPlayer");
 
-    function videoTimeUpdate(e)
-    {
-        vid.setAttribute("controls","controls");
+        function videoTimeUpdate(e) {
+            vid.setAttribute("controls", "controls");
+        }
+
+        vid.addEventListener('timeupdate', videoTimeUpdate, false);
+
+        vid.onplaying = function() {
+            setShowPoster(false);
+        };
+
+
+        if (interactiveIsShown) {
+            vid.onplay = function() {
+                setInteractiveIsShown(false);
+            };
+        }
     }
-        
-    vid.addEventListener('timeupdate', videoTimeUpdate, false);
-    }
 
+    window.addEventListener('click', event => {
+        if (event.target.matches('video')) {
+          event.stopPropagation();
+        }
+      }, true);
 
+    
 
 
 
@@ -145,9 +170,9 @@ export default function Player2() {
         <div className={styles.container} id="video-container">
             <div className={styles['video-container']}>
                 <video id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} width={width} height={height} controls/>
+                    ref={player} width={width} height={height} controls />
             </div>
-            {currentTime === 0 && !interactiveIsShown && <div className={styles.cover}>
+            {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
                 <p>{videoData.heading}</p></div>
             }
             <div className={styles['toggle-btn-wrapper']}>

@@ -10,8 +10,8 @@
 }
 .fullscreen-container {
     box-sizing: border-box;
-    width: 100vw;
-    height: 92vh;
+    width: 100%;
+    height: 92%;
     background: #ffffff;
     border-radius: 4px;
     padding: 30px 60px;

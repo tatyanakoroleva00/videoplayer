@@ -2,7 +2,7 @@
   .quiz-container {
     box-sizing: border-box;
     width: 1000px;
-    height: 485px;
+    height: 480px;
     background: #ffffff;
     border-radius: 4px;
     padding: 30px 60px;
@@ -11,8 +11,8 @@
 
   .fullscreen-quiz-container {
     box-sizing: border-box;
-    width: 100vw;
-    height: 92vh;
+    width: 100%;
+    height: 92%;
     background: #ffffff;
     border-radius: 4px;
     padding: 30px 60px;

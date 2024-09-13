@@ -126,12 +126,10 @@ export default function Player2() {
             setFullScreen(true);
             fullscreenApi.call(container);
         }
-
         else {
             setFullScreen(false);
             document.exitFullscreen();
         }
-
     }
 
 
@@ -148,29 +146,28 @@ export default function Player2() {
             setShowPoster(false);
         };
 
-
         if (interactiveIsShown) {
             vid.onplay = function() {
                 setInteractiveIsShown(false);
             };
         }
     }
-
-    window.addEventListener('click', event => {
+      window.addEventListener('click', event => {
         if (event.target.matches('video')) {
           event.stopPropagation();
+        //   event.preventDefault();
         }
       }, true);
 
-    
-
+   
+     
 
 
     return (
         <div className={styles.container} id="video-container">
             <div className={styles['video-container']}>
                 <video id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} width={width} height={height} controls />
+                    ref={player} width={width} height={height} controls  />
             </div>
             {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
                 <p>{videoData.heading}</p></div>

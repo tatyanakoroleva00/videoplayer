@@ -1,22 +1,22 @@
 .container {
     box-sizing: border-box;
-    width: 1000px;
-    height: 480px;
+    width: 100%;
+    height: 100%;
     background: #ffffff;
     border-radius: 4px;
     padding: 30px 60px;
     display: flex;
     position: absolute;
 }
-.fullscreen-container {
+.container:fullscreen {
     box-sizing: border-box;
     width: 100%;
-    height: 92%;
-    background: #ffffff;
+    height: 120%;
+    background: #490707;
     border-radius: 4px;
     padding: 30px 60px;
     position: absolute;
-  }
+}
 .cor-words-wrapper {
     margin: 0 auto;
 }

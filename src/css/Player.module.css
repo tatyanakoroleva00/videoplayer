@@ -3,13 +3,13 @@
     margin: 0 auto; 
     min-width: 670px;
     min-height: 400px;
-    width: 45vw;
+    width: 40vw;
     height: 55vh;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.425);
     margin-top: 2rem;
     position: relative;
     margin-bottom: 5rem;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
 }
 video {
     width: 100%;
@@ -26,13 +26,17 @@ video {
     width: 100vw;
     position: absolute;
 }
-/* .container:fullscreen .interactive {
-    width: 100vw;
-    height: 93vh;
-} */
 .container:fullscreen .interactive {
     width: 100%;
     height: 93%;
+}
+.interactive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 86%;
 }
 .container:fullscreen .interactives-line {
     width: 100vw;
@@ -48,20 +52,22 @@ video {
 .not-visible {
     display: none;
 }
-.interactive {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    width: 100%;
-    height: 88%;
-}
+
 .interactives-line {
-    width: 100%;
+    width: 96.2%;
     z-index: 999;
     position: absolute;
-    left: 15px;
-    display: flex; 
+    display: flex;
+    margin-left: 1.9%;
+    height: 1rem;
+    bottom: 0rem;
+}
+.container:fullscreen .interactives-line {
+    z-index: 999;
+    width: 96.7%;
+    position: absolute;
+    display: flex;
+    margin-left: 1.65%;
     height: 1rem;
     bottom: 0rem;
 }

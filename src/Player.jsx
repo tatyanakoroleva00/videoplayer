@@ -11,9 +11,6 @@ export default function Player2() {
     const [interactivesArr, setInteractivesArr] = useState([]);
     const [duration, setDuration] = useState(0);
     const [interactiveIsShown, setInteractiveIsShown] = useState(false);
-    const [pixels, setPixels] = useState(0);
-    const [width, setWidth] = useState(player.current?.offsetWidth);
-    const [height, setHeight] = useState(player.current?.offsetHeight);
     const [fullScreen, setFullScreen] = useState(false);
     const [showPoster, setShowPoster] = useState(true);
 
@@ -60,7 +57,6 @@ export default function Player2() {
         }
     }
 
-
     useEffect(() => {
         for (let elem of interactivesArr) {
 
@@ -90,9 +86,10 @@ export default function Player2() {
     let timeCodes = [];
     for (let elem of interactivesArr) {
         let resultTime = convertTime(elem['time_code']);
-        let pixels = resultTime * Math.floor(1250 / duration);
-        timeCodes.push(pixels);
+        let percents = resultTime / duration * 100;
+        timeCodes.push(percents);
     }
+
 
     const showInteractive = (index) => {
         let resultTime = convertTime(interactivesArr[index]['time_code']);
@@ -102,27 +99,35 @@ export default function Player2() {
         player.current.pause();
     }
 
-    // if (player?.current) {
-    //     let videoPlayer = document.getElementById('videoPlayer');
-    //     videoPlayer.addEventListener('click', function () {
-    //         this.requestFullscreen();
-    //     })
-    // }
 
+    //Клик на невидимую кнопку "расширить экран"
     const toggleFullScreen = async () => {
         const container = document.getElementById('video-container');
+        const video = document.getElementById('videoPlayer');
         const fullscreenApi = container.requestFullscreen || container.webkitRequestFullScreen
             || container.mozRequestFullScreen
             || container.msRequestFullscreen;
-
+        
         if (!document.fullscreenElement) {
             setFullScreen(true);
             fullscreenApi.call(container);
+
         }
         else {
             setFullScreen(false);
             document.exitFullscreen();
         }
+
+        //Выход из fullscreen по нажатию на кнопку Escape 
+        document.addEventListener('fullscreenchange', function() {
+            if (document.fullscreenElement) {
+                // console.log('Видео вошло в полноэкранный режим2');
+            } else {
+                // console.log('Видео вышло из полноэкранного режим2');
+                setFullScreen(false);
+            }
+        }, false);
+    
     }
 
     if (player.current) {
@@ -144,21 +149,7 @@ export default function Player2() {
             };
         }
     }
-    let videoPlayer = document.getElementById('videoPlayer');
-    function isFullScreen() {
-        return document.fullscreenElement === videoPlayer ||
-               document.webkitFullscreenElement === videoPlayer ||
-               document.mozFullScreenElement === videoPlayer ||
-               document.msFullscreenElement === videoPlayer;
-    }
 
-    document.addEventListener('fullscreenchange', function() {
-        if (isFullScreen()) {
-            console.log('Видео вошло в полноэкранный режим');
-        } else {
-            console.log('Видео вышло из полноэкранного режима');
-        }
-    });
 
     return (
         <div className={styles.container} id="video-container">
@@ -177,7 +168,7 @@ export default function Player2() {
             </div>
             <div className={styles['interactives-line']}>
                 {interactivesArr?.map((elem, index) => (
-                    <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: timeCodes[index] }} className={styles['interactive-point']}></div>
+                    <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: `${timeCodes[index]}%` }} className={styles['interactive-point']}></div>
                 ))}
             </div>
         </div>

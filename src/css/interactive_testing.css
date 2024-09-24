@@ -23,7 +23,8 @@
     font-size: 32px;
     font-weight: 500;
     color: #800080;
-  }
+}
+
 .hide-interactive {
     position: absolute;
     right: 1rem;

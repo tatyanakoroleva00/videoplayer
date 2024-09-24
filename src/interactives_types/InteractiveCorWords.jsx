@@ -78,7 +78,7 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
             </li>
           ))}
         </ul>
-        <button onClick={checkResultHandler} className={styles['check-button']}>Проверить</button>
+        {!checked && <button onClick={checkResultHandler} className={styles['check-button']}>Проверить</button>}
         {checked &&
         <>
         <p>Результат: {result} </p>

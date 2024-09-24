@@ -16,15 +16,13 @@
     padding: 15% 25%;
     position: absolute;
 }
-
-
 .external-link-wrapper {
     margin: 0 auto;
 }
 .next-button {
     background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
     border-radius: 9px;
-    font-size: 18px;
+    font-size: 1.2rem;
     color: #ffffff;
     padding: 10px 42px;
     outline: none;
@@ -33,8 +31,9 @@
     margin-top: 15px;
 }
 .link-description {
-    font-size: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 .weblink {
-    font-size: 24px;
+    font-size: 1.2rem;
 }

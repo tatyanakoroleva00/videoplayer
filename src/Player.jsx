@@ -12,10 +12,9 @@ export default function Player2() {
     const [duration, setDuration] = useState(0);
     const [interactiveIsShown, setInteractiveIsShown] = useState(false);
     const [pixels, setPixels] = useState(0);
-    const [width, setWidth] = useState(1000);
-    const [height, setHeight] = useState(550);
+    const [width, setWidth] = useState(player.current?.offsetWidth);
+    const [height, setHeight] = useState(player.current?.offsetHeight);
     const [fullScreen, setFullScreen] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
     const [showPoster, setShowPoster] = useState(true);
 
 
@@ -30,21 +29,17 @@ export default function Player2() {
                 setInteractivesArr(data.interactives);
             })
     }, [])
-
     useEffect(() => {
         if (!player) return;
         else {
             setDuration(player.current?.duration);
             player.current?.addEventListener("loadeddata", handleDataLoaded);
         }
-
     }, [player])
-
 
     const handleDataLoaded = () => {
         setDuration(player.current?.duration || 0);
     };
-
 
     //Episodes
     //Перебор интерактивов. Получение таймкода и номера интерактива. 
@@ -66,7 +61,6 @@ export default function Player2() {
     }
 
 
-
     useEffect(() => {
         for (let elem of interactivesArr) {
 
@@ -86,7 +80,6 @@ export default function Player2() {
     const timeUpdateHandler = () => {
         let time = player.current?.currentTime;
         setCurrentTime(Math.floor(time));
-
     }
 
     const handlePlayPauseClick = () => {
@@ -132,7 +125,6 @@ export default function Player2() {
         }
     }
 
-
     if (player.current) {
         let vid = document.getElementById("videoPlayer");
 
@@ -152,18 +144,27 @@ export default function Player2() {
             };
         }
     }
-      window.addEventListener('click', event => {
-        if (event.target.matches('video')) {
-          event.stopPropagation();
-        //   event.preventDefault();
+    let videoPlayer = document.getElementById('videoPlayer');
+    function isFullScreen() {
+        return document.fullscreenElement === videoPlayer ||
+               document.webkitFullscreenElement === videoPlayer ||
+               document.mozFullScreenElement === videoPlayer ||
+               document.msFullscreenElement === videoPlayer;
+    }
+
+    document.addEventListener('fullscreenchange', function() {
+        if (isFullScreen()) {
+            console.log('Видео вошло в полноэкранный режим');
+        } else {
+            console.log('Видео вышло из полноэкранного режима');
         }
-      }, true);
+    });
 
     return (
         <div className={styles.container} id="video-container">
             <div className={styles['video-container']}>
                 <video id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} width={width} height={height} controls  />
+                    ref={player} controls />
             </div>
             {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
                 <p>{videoData.heading}</p></div>
@@ -176,10 +177,10 @@ export default function Player2() {
             </div>
             <div className={styles['interactives-line']}>
                 {interactivesArr?.map((elem, index) => (
-                    <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: timeCodes[index] }} className={styles.first}></div>
+                    <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: timeCodes[index] }} className={styles['interactive-point']}></div>
                 ))}
             </div>
-
         </div>
+
     )
 }

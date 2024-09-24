@@ -14,7 +14,6 @@ export default function Player2() {
     const [fullScreen, setFullScreen] = useState(false);
     const [showPoster, setShowPoster] = useState(true);
 
-
     useEffect(() => {
         fetch('http://quiz.site/edit-videocourse-handler', {
             method: 'POST',
@@ -50,13 +49,6 @@ export default function Player2() {
         return resultTime;
     }
 
-    if (player.current) {
-        let vid = document.getElementById('videoPlayer');
-        if (!vid.onplaying) {
-            console.log(true);
-        }
-    }
-
     useEffect(() => {
         for (let elem of interactivesArr) {
 
@@ -86,10 +78,9 @@ export default function Player2() {
     let timeCodes = [];
     for (let elem of interactivesArr) {
         let resultTime = convertTime(elem['time_code']);
-        let percents = resultTime / duration * 100;
+        let percents = (resultTime + 0.8) / duration * 100;
         timeCodes.push(percents);
     }
-
 
     const showInteractive = (index) => {
         let resultTime = convertTime(interactivesArr[index]['time_code']);
@@ -98,7 +89,6 @@ export default function Player2() {
         player.current.currentTime = resultTime + 1;
         player.current.pause();
     }
-
 
     //Клик на невидимую кнопку "расширить экран"
     const toggleFullScreen = async () => {
@@ -111,7 +101,6 @@ export default function Player2() {
         if (!document.fullscreenElement) {
             setFullScreen(true);
             fullscreenApi.call(container);
-
         }
         else {
             setFullScreen(false);
@@ -151,11 +140,24 @@ export default function Player2() {
     }
 
 
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+      setIsHovered(true);
+    };
+  
+    const handleMouseLeave = () => {
+      setIsHovered(false);
+    };
+  
+
+
     return (
-        <div className={styles.container} id="video-container">
+        <div className={styles.container} id="video-container"  onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
             <div className={styles['video-container']}>
-                <video id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} controls />
+                <video className={interactiveIsShown ? styles['video-with-interactive'] : styles['video-without-interactives']} id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
+                    ref={player} controls/>
             </div>
             {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
                 <p>{videoData.heading}</p></div>
@@ -166,7 +168,7 @@ export default function Player2() {
             <div className={`${interactiveIsShown ? styles.interactive : styles['not-visible']}`}>
                 {interactiveIsShown && <Interactives fullScreen={fullScreen} timeCode={timeCode} interactivesArr={interactivesArr} click={handlePlayPauseClick} />}
             </div>
-            <div className={styles['interactives-line']}>
+            <div className={`${isHovered ? styles['interactives-line'] : styles['not-visible']}`}>
                 {interactivesArr?.map((elem, index) => (
                     <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: `${timeCodes[index]}%` }} className={styles['interactive-point']}></div>
                 ))}

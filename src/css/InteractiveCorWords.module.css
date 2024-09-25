@@ -71,7 +71,15 @@
 .next-button {
     background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
 }
-.hide-interactive-btn {
+  .next-btn, .continue-btn, .hide-interactive-btn {
+    border-radius: 9px;
+    font-size: 18px;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  .hide-interactive-btn {
     background: linear-gradient(90.04deg, #0cb667 0.03%, #0ca17c 99.96%);
     position: absolute;
     top: 1rem;

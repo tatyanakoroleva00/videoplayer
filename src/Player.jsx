@@ -93,7 +93,6 @@ export default function Player2() {
     //Клик на невидимую кнопку "расширить экран"
     const toggleFullScreen = async () => {
         const container = document.getElementById('video-container');
-        const video = document.getElementById('videoPlayer');
         const fullscreenApi = container.requestFullscreen || container.webkitRequestFullScreen
             || container.mozRequestFullScreen
             || container.msRequestFullscreen;
@@ -138,7 +137,6 @@ export default function Player2() {
             };
         }
     }
-
 
     const [isHovered, setIsHovered] = useState(false);
 

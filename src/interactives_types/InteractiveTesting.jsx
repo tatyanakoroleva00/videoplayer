@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../css/interactive_testing.css';
+import styles from '../css/InteractiveTesting.module.css';
 
 export default function InteractiveTesting ({click, timeCode, interactivesArr, fullScreen}) {
 
@@ -15,7 +15,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
 
     if (Math.floor(timeCode) == resultTime) {
           data = elem;
-          console.log(elem['receivedInfo'], 'elem');
+          // console.log(elem['receivedInfo'], 'elem');
       }
   }
 
@@ -89,9 +89,9 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
   const onAnswerSelected = (answer, index) => {
     setSelectedAnswerIndex(index);
     let chosenAnswer = index + 1;
-    console.log(chosenAnswer, 'answerindex');
+    // console.log(chosenAnswer, 'answerindex');
    if (chosenAnswer === Math.floor(correctAnswer)) {
-    console.log(correctAnswer, 'correctAnswer');
+    // console.log(correctAnswer, 'correctAnswer');
       setSelectedAnswer(true)
     } else {
       setSelectedAnswer(false)
@@ -101,33 +101,33 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
   const addLeadingZero = (number) => (number > 9 ? number : `0${number}`)
 
   return (
-    <div className={`${fullScreen  ? 'container-fullscreen' : 'quiz-container'}`}>
+    <div className={`${fullScreen  ? styles['container-fullscreen'] : styles['quiz-container']}`}>
       {!showResult ? (
         <div>
-          <div><button className={'hide-interactive-btn'} onClick={click}> X </button></div>
+          <div><button className={styles['hide-interactive-btn']} onClick={click}> X </button></div>
           <div>
-            <span className="active-question-no">{addLeadingZero(activeQuestion + 1)}</span>
-            <span className="total-question">/{addLeadingZero(questions.length)}</span>
+            <span className={styles["active-question-no"]}>{addLeadingZero(activeQuestion + 1)}</span>
+            <span className={styles["total-question"]}>/{addLeadingZero(questions.length)}</span>
           </div>
           <h2>{question_name}</h2>
           <ul>
             {choices.map((answer, index) => (
               <li
                 onClick={() => onAnswerSelected(answer, index)}
-                key={answer}
-                className={selectedAnswerIndex === index ? 'selected-answer' : null}>
+                key={answer + index}
+                className={selectedAnswerIndex === index ? styles['selected-answer'] : null}>
                 {answer}
               </li>
             ))}
           </ul>
-          <div className="flex-right">
-            <button className='next-btn' onClick={onClickNext} disabled={selectedAnswerIndex === null}>
+          <div className={styles["flex-right"]}>
+            <button className={styles['next-btn']} onClick={onClickNext} disabled={selectedAnswerIndex === null}>
               {activeQuestion === questions.length - 1 ? 'Завершить' : 'Далее'}
             </button>
           </div>
         </div>
       ) : (
-        <div className="result">
+        <div className={styles.result}>
           <h3>Результат</h3>
           <p>
             Количество вопросов: <span>{questions.length}</span>
@@ -141,7 +141,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
           <p>
             Неправильные ответы:<span> {result.wrongAnswers}</span>
           </p>
-          <button className='continue-btn' onClick={click}>Продолжить</button>
+          <button className={styles['continue-btn']} onClick={click}>Продолжить</button>
         </div>
       )}
     </div>

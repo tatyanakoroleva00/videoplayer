@@ -4,8 +4,9 @@
     height: 100%;
     background: #ffffff;
     border-radius: 4px;
-    padding: 20px 30px;
-    display: flex;
+    /* padding: 20px 30px; */
+    padding: 30px 60px;
+    /* display: flex; */
     position: absolute;
 }
 .container-fullscreen {
@@ -25,11 +26,15 @@
     gap: 1rem;
     flex-wrap: wrap;
 }
+.title {
+    /* font-size: 1rem; */
+    font-weight: bold;
+}
 .word {
     text-decoration: none;
     list-style: none;
     color: #2d264b;
-    font-size: 16px;
+    /* font-size: 16px; */
     background: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 16px;
@@ -41,7 +46,7 @@
     text-decoration: none;
     list-style: none;
     color: #2d264b;
-    font-size: 16px;
+    /* font-size: 16px; */
     background: #ffffff;
     border-radius: 16px;
     padding: 11px;

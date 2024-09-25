@@ -128,7 +128,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
         </div>
       ) : (
         <div className={styles.result}>
-          <h3>Результат</h3>
+          <h2>Результат</h2>
           <p>
             Количество вопросов: <span>{questions.length}</span>
           </p>

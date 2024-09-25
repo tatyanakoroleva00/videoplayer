@@ -91,3 +91,10 @@
   .hide-interactive-btn:hover {
     opacity: 0.9;
   }
+
+  h2 {
+    font-size: 18px;
+}
+h3 {
+    font-size: 18px;
+}

@@ -69,7 +69,7 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
     <div className={`${fullScreen ? styles['container-fullscreen'] : styles.container}`}>
       <div className={styles['cor-words-wrapper']}>
       <div><button className={styles['hide-interactive-btn']} onClick={click}> X </button></div>
-        <p className={styles.title}>{correctWordsData.task}</p>
+        <h2 className={styles.title}>{correctWordsData.task}</h2>
         <ul className={styles['words-box']}>
           {words.map((answer, index) => (
             <li className={`${chosenWords[answer]? styles.selected : styles.word}`} onClick = {() => {chooseWordHandler(answer)}}

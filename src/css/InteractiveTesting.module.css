@@ -32,16 +32,15 @@
   }
   
 .total-question {
-    font-size: 16px;
-    font-weight: 500;
+    /* font-weight: 500; */
     color: #e0dee3;
   }
   
-h2 {
-    font-size: 20px;
+/* h2 {
     font-weight: 500;
+    font-size: 18px;
     margin: 0;
-  }
+  } */
   
 ul {
     margin-top: 20px;
@@ -52,7 +51,6 @@ ul li {
     text-decoration: none;
     list-style: none;
     color: #2d264b;
-    font-size: 16px;
     background: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 16px;
@@ -102,14 +100,12 @@ ul .selected-answer {
     justify-content: flex-end;
   }
   
-  .result h3 {
-    font-size: 24px;
+  .result h2 {
     letter-spacing: 1.4px;
     text-align: center;
   }
   
   .result p {
-    font-size: 16px;
     font-weight: 500;
   }
   
@@ -117,3 +113,10 @@ ul .selected-answer {
     color: #800080;
     font-size: 22px;
   }
+
+  h2 {
+    font-size: 18px;
+}
+h3 {
+    font-size: 18px;
+}

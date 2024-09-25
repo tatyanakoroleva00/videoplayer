@@ -30,10 +30,14 @@
     cursor: pointer;
     margin-top: 15px;
 }
-.link-description {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
+
 .weblink {
     font-size: 1.2rem;
+}
+
+h2 {
+    font-size: 18px;
+}
+h3 {
+    font-size: 18px;
 }

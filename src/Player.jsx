@@ -121,11 +121,11 @@ export default function Player2() {
     if (player.current) {
         let vid = document.getElementById("videoPlayer");
 
-        function videoTimeUpdate(e) {
-            vid.setAttribute("controls", "controls");
-        }
+        // function videoTimeUpdate(e) {
+        //     vid.setAttribute("controls", "controls");
+        // }
 
-        vid.addEventListener('timeupdate', videoTimeUpdate, false);
+        // vid.addEventListener('timeupdate', videoTimeUpdate, false);
 
         vid.onplaying = function() {
             setShowPoster(false);
@@ -138,24 +138,23 @@ export default function Player2() {
         }
     }
 
-    const [isHovered, setIsHovered] = useState(false);
+    // const [isHovered, setIsHovered] = useState(false);
 
-    const handleMouseEnter = () => {
-      setIsHovered(true);
-    };
+    // const handleMouseEnter = () => {
+    //   setIsHovered(true);
+    // };
   
-    const handleMouseLeave = () => {
-      setIsHovered(false);
-    };
+    // const handleMouseLeave = () => {
+    //   setIsHovered(false);
+    // };
   
 
 
     return (
-        <div className={styles.container} id="video-container"  onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}>
+        <div className={styles.container} id="video-container" >
             <div className={styles['video-container']}>
                 <video className={interactiveIsShown ? styles['video-with-interactive'] : styles['video-without-interactives']} id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} controls/>
+                    ref={player} preload='auto' controls/>
             </div>
             {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
                 <p>{videoData.heading}</p></div>
@@ -166,7 +165,7 @@ export default function Player2() {
             <div className={`${interactiveIsShown ? styles.interactive : styles['not-visible']}`}>
                 {interactiveIsShown && <Interactives fullScreen={fullScreen} timeCode={timeCode} interactivesArr={interactivesArr} click={handlePlayPauseClick} />}
             </div>
-            <div className={`${isHovered ? styles['interactives-line'] : styles['not-visible']}`}>
+            <div className={styles['interactives-line']}>
                 {interactivesArr?.map((elem, index) => (
                     <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: `${timeCodes[index]}%` }} className={styles['interactive-point']}></div>
                 ))}

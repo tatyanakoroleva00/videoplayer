@@ -18,7 +18,6 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
 
     if (Math.floor(timeCode) == resultTime) {
           data = elem;
-          console.log(elem['receivedInfo'], 'elem');
       }
   }
 
@@ -64,7 +63,6 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
     }
   };
 
-
   return (
     <div className={`${fullScreen ? styles['container-fullscreen'] : styles.container}`}>
       <div className={styles['cor-words-wrapper']}>
@@ -73,7 +71,7 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
         <ul className={styles['words-box']}>
           {words.map((answer, index) => (
             <li className={`${chosenWords[answer]? styles.selected : styles.word}`} onClick = {() => {chooseWordHandler(answer)}}
-              key={answer}>
+              key={answer + index}>
               {answer}
             </li>
           ))}

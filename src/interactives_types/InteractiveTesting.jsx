@@ -15,7 +15,6 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
 
     if (Math.floor(timeCode) == resultTime) {
           data = elem;
-          // console.log(elem['receivedInfo'], 'elem');
       }
   }
 
@@ -89,9 +88,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
   const onAnswerSelected = (answer, index) => {
     setSelectedAnswerIndex(index);
     let chosenAnswer = index + 1;
-    // console.log(chosenAnswer, 'answerindex');
    if (chosenAnswer === Math.floor(correctAnswer)) {
-    // console.log(correctAnswer, 'correctAnswer');
       setSelectedAnswer(true)
     } else {
       setSelectedAnswer(false)

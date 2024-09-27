@@ -4,7 +4,7 @@ import InteractiveCorWords from './interactives_types/InteractiveCorWords';
 import InteractiveTesting from './interactives_types/InteractiveTesting';
 
 export default function Interactives({ timeCode, interactivesArr, click, fullScreen }) {
-
+  //Выявляем тип интерактива по таймкоду интерактива и времени на timeline
   let interactiveType = '';
   for (let elem of interactivesArr) {
 

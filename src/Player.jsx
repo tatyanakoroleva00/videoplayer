@@ -1,9 +1,8 @@
 import styles from './css/Player.module.css'
 import { useEffect, useRef, useState } from "react";
 import Interactives from './Interactives';
-//  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" 
 
-export default function Player2() {
+export default function Player() {
     const player = useRef(null);
     const [currentTime, setCurrentTime] = useState(0);
     const [timeCode, setTimeCode] = useState('');
@@ -14,6 +13,7 @@ export default function Player2() {
     const [fullScreen, setFullScreen] = useState(false);
     const [showPoster, setShowPoster] = useState(true);
 
+    //Делаем одиночный запрос на сервер и получаем видео с данными по интерактивам
     useEffect(() => {
         fetch('http://quiz.site/edit-videocourse-handler', {
             method: 'POST',
@@ -25,6 +25,8 @@ export default function Player2() {
                 setInteractivesArr(data.interactives);
             })
     }, [])
+
+    //Определяем длину видео
     useEffect(() => {
         if (!player) return;
         else {
@@ -37,9 +39,8 @@ export default function Player2() {
         setDuration(player.current?.duration || 0);
     };
 
-    //Episodes
-    //Перебор интерактивов. Получение таймкода и номера интерактива. 
-
+    //Интерактивы. 
+    //Конвертируем время интерактива в формате 01:00 в целочисленное значение. Отдаем результат. 
     function convertTime(episodeTime) {
         let timeSplitted = episodeTime.split(':');
         let minutes = Math.floor(+timeSplitted[0]);
@@ -49,14 +50,14 @@ export default function Player2() {
         return resultTime;
     }
 
+    // Перебираем все интерактивы. Отправляем в функцию convertTime. Если время проигрыша видео совпадает со временем интерактива,
+    // то появляется интерактив. Видео ставится на паузу. Идет смещение на 1 секунду вперед, чтобы не было loop-а. 
     useEffect(() => {
         for (let elem of interactivesArr) {
-
             let resultTime = convertTime(elem['time_code']);
 
             if (currentTime === resultTime) {
                 setTimeCode(currentTime);
-
                 setInteractiveIsShown(true);
                 player.current.currentTime = resultTime + 1;
                 player.current.pause();
@@ -64,17 +65,18 @@ export default function Player2() {
         }
     }, [player, currentTime])
 
-    //Сразу устанавливаем счетчик для времени
+    //Сразу устанавливаем счетчик для времени. Время приводим к целому числу. 
     const timeUpdateHandler = () => {
         let time = player.current?.currentTime;
         setCurrentTime(Math.floor(time));
     }
-
+    //Интерактив скрывается по нажатию на кнопку (продолжить, крестик)
     const handlePlayPauseClick = () => {
         setInteractiveIsShown(false);
         player.current.play();
     };
 
+    //Рассчитывание таймкодов в % для линии с тайм-кодами интерактивов. По итогу имеет [15, 25, 55] % . 
     let timeCodes = [];
     for (let elem of interactivesArr) {
         let resultTime = convertTime(elem['time_code']);
@@ -82,6 +84,7 @@ export default function Player2() {
         timeCodes.push(percents);
     }
 
+    //Интерактив показывается по нажатию на точку с интерактивом на панели
     const showInteractive = (index) => {
         let resultTime = convertTime(interactivesArr[index]['time_code']);
         setTimeCode(resultTime);
@@ -96,7 +99,7 @@ export default function Player2() {
         const fullscreenApi = container.requestFullscreen || container.webkitRequestFullScreen
             || container.mozRequestFullScreen
             || container.msRequestFullscreen;
-        
+
         if (!document.fullscreenElement) {
             setFullScreen(true);
             fullscreenApi.call(container);
@@ -106,55 +109,36 @@ export default function Player2() {
             document.exitFullscreen();
         }
 
-        //Выход из fullscreen по нажатию на кнопку Escape 
-        document.addEventListener('fullscreenchange', function() {
+        //Выход из fullscreen по нажатию на кнопку Escape, реагирование на смену режимов экрана. 
+        document.addEventListener('fullscreenchange', function () {
             if (document.fullscreenElement) {
-                // console.log('Видео вошло в полноэкранный режим2');
+                // console.log('Видео вошло в полноэкранный режима');
             } else {
-                // console.log('Видео вышло из полноэкранного режим2');
+                // console.log('Видео вышло из полноэкранного режима');
                 setFullScreen(false);
             }
         }, false);
-    
     }
 
+    //Когда видео начинает проигрываться: 1. Заставка исчезает. 2. Интерактив пропадает.
     if (player.current) {
         let vid = document.getElementById("videoPlayer");
 
-        // function videoTimeUpdate(e) {
-        //     vid.setAttribute("controls", "controls");
-        // }
-
-        // vid.addEventListener('timeupdate', videoTimeUpdate, false);
-
-        vid.onplaying = function() {
+        vid.onplaying = function () {
             setShowPoster(false);
         };
 
         if (interactiveIsShown) {
-            vid.onplay = function() {
+            vid.onplay = function () {
                 setInteractiveIsShown(false);
             };
         }
     }
-
-    // const [isHovered, setIsHovered] = useState(false);
-
-    // const handleMouseEnter = () => {
-    //   setIsHovered(true);
-    // };
-  
-    // const handleMouseLeave = () => {
-    //   setIsHovered(false);
-    // };
-  
-
-
     return (
         <div className={styles.container} id="video-container" >
             <div className={styles['video-container']}>
                 <video className={interactiveIsShown ? styles['video-with-interactive'] : styles['video-without-interactives']} id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} preload='auto' controls/>
+                    ref={player} preload='auto' controls />
             </div>
             {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
                 <p>{videoData.heading}</p></div>

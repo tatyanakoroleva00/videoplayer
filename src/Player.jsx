@@ -59,7 +59,7 @@ export default function Player() {
             if (currentTime === resultTime) {
                 setTimeCode(currentTime);
                 setInteractiveIsShown(true);
-                player.current.currentTime = resultTime + 1;
+                player.current.currentTime = resultTime;
                 player.current.pause();
             }
         }
@@ -89,7 +89,7 @@ export default function Player() {
         let resultTime = convertTime(interactivesArr[index]['time_code']);
         setTimeCode(resultTime);
         setInteractiveIsShown(true);
-        player.current.currentTime = resultTime + 1;
+        player.current.currentTime = resultTime;
         player.current.pause();
     }
 

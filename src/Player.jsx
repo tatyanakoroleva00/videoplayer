@@ -138,7 +138,7 @@ export default function Player() {
         <div className={styles.container} id="video-container" >
             <div className={styles['video-container']}>
                 <video className={interactiveIsShown ? styles['video-with-interactive'] : styles['video-without-interactives']} id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} preload='auto' controls />
+                    ref={player} preload='auto' controlsList='nodownload' controls />
             </div>
             {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
                 <p>{videoData.heading}</p></div>

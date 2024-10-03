@@ -171,7 +171,3 @@ video::-webkit-media-controls-return-to-realtime-button {
 .container:fullscreen .interactive{
     position: fixed;
 }
-
-/* .container:fullscreen .interactives-line  {
-    position: fixed;
-} */

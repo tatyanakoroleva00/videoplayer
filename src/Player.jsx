@@ -1,6 +1,7 @@
 import styles from './css/Player.module.css'
 import { useEffect, useRef, useState } from "react";
 import Interactives from './Interactives';
+// import setting2 from './images/settings2.png';
 
 export default function Player() {
     const player = useRef(null);
@@ -54,7 +55,9 @@ export default function Player() {
     // то появляется интерактив. Видео ставится на паузу. Идет смещение на 1 секунду вперед, чтобы не было loop-а. 
     useEffect(() => {
         for (let elem of interactivesArr) {
-            let resultTime = convertTime(elem['time_code']);
+            let resultTime = convertTime(elem['data']['time_code']);
+
+            console.log(resultTime, 'resTime');
 
             if (currentTime === resultTime) {
                 setTimeCode(currentTime);
@@ -79,14 +82,14 @@ export default function Player() {
     //Рассчитывание таймкодов в % для линии с тайм-кодами интерактивов. По итогу имеет [15, 25, 55] % . 
     let timeCodes = [];
     for (let elem of interactivesArr) {
-        let resultTime = convertTime(elem['time_code']);
+        let resultTime = convertTime(elem['data']['time_code']);
         let percents = (resultTime + 0.8) / duration * 100;
         timeCodes.push(percents);
     }
 
     //Интерактив показывается по нажатию на точку с интерактивом на панели
     const showInteractive = (index) => {
-        let resultTime = convertTime(interactivesArr[index]['time_code']);
+        let resultTime = convertTime(interactivesArr[index]['data']['time_code']);
         setTimeCode(resultTime);
         setInteractiveIsShown(true);
         player.current.currentTime = resultTime;
@@ -134,27 +137,30 @@ export default function Player() {
             };
         }
     }
-    return (
-        <div className={styles.container} id="video-container" >
-            <div className={styles['video-container']}>
-                <video className={interactiveIsShown ? styles['video-with-interactive'] : styles['video-without-interactives']} id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
-                    ref={player} preload='auto' controlsList='nodownload' controls />
-            </div>
-            {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
-                <p>{videoData.heading}</p></div>
-            }
-            <div className={styles['toggle-btn-wrapper']}>
-                <button id="fullscreen-toggle-btn" className={`${fullScreen ? styles['toggle-btn-fullscreen'] : styles['toggle-btn']}`} onClick={toggleFullScreen}></button>
-            </div>
-            <div className={`${interactiveIsShown ? styles.interactive : styles['not-visible']}`}>
-                {interactiveIsShown && <Interactives fullScreen={fullScreen} timeCode={timeCode} interactivesArr={interactivesArr} click={handlePlayPauseClick} />}
-            </div>
-            <div className={styles['interactives-line']}>
-                {interactivesArr?.map((elem, index) => (
-                    <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: `${timeCodes[index]}%` }} className={styles['interactive-point']}></div>
-                ))}
-            </div>
-        </div>
 
+    
+    return (
+        <>
+            <div className={styles.container} id="video-container" >
+                <div className={styles['video-container']}>
+                    <video className={interactiveIsShown ? styles['video-with-interactive'] : styles['video-without-interactives']} id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
+                        ref={player} preload='auto' controlsList='nodownload' controls />
+                </div>
+                {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
+                    <p>{videoData.heading}</p></div>
+                }
+                <div className={styles['toggle-btn-wrapper']}>
+                    <button id="fullscreen-toggle-btn" className={`${fullScreen ? styles['toggle-btn-fullscreen'] : styles['toggle-btn']}`} onClick={toggleFullScreen}></button>
+                </div>
+                <div className={`${interactiveIsShown ? styles.interactive : styles['not-visible']}`}>
+                    {interactiveIsShown && <Interactives fullScreen={fullScreen} timeCode={timeCode} interactivesArr={interactivesArr} click={handlePlayPauseClick} />}
+                </div>
+                <div className={styles['interactives-line']}>
+                    {interactivesArr?.map((elem, index) => (
+                        <div id={index} key={index} onClick={() => showInteractive(index)} style={{ left: `${timeCodes[index]}%` }} className={styles['interactive-point']}></div>
+                    ))}
+                </div>
+            </div>
+        </>
     )
 }

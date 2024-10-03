@@ -6,7 +6,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
   let data = {};
   for (let elem of interactivesArr) {
 
-    let episodeTime = elem['time_code'];
+    let episodeTime = elem['data']['time_code'];
     let timeSplitted = episodeTime.split(':');
     let minutes = Math.floor(+timeSplitted[0]);
     let secondsInMinutes = minutes * 60;
@@ -14,7 +14,7 @@ export default function InteractiveTesting ({click, timeCode, interactivesArr, f
     let resultTime = secondsInMinutes + seconds;
 
     if (Math.floor(timeCode) == resultTime) {
-          data = elem;
+          data = elem['data'];
       }
   }
 

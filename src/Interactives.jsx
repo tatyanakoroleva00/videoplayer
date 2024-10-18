@@ -8,7 +8,7 @@ export default function Interactives({ timeCode, interactivesArr, click, fullScr
   let interactiveType = '';
   for (let elem of interactivesArr) {
 
-    let episodeTime = elem['data']['time_code'];
+    let episodeTime = elem['time_code'];
     let timeSplitted = episodeTime.split(':');
     let minutes = Math.floor(+timeSplitted[0]);
     let secondsInMinutes = minutes * 60;
@@ -16,7 +16,7 @@ export default function Interactives({ timeCode, interactivesArr, click, fullScr
     let resultTime = secondsInMinutes + seconds;
 
     if (Math.floor(timeCode) == resultTime) {
-      interactiveType = elem['data']['interactive_type'];
+      interactiveType = elem['interactive_type'];
     }
   }
 

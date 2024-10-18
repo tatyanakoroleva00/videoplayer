@@ -54,7 +54,7 @@
     cursor: pointer;
     border: 1px solid #800080;
 }
-.check-button, .next-button {
+.check-button, .next-button, .replay-button {
     border-radius: 9px;
     font-size: 18px;
     color: #ffffff;
@@ -64,12 +64,18 @@
     cursor: pointer;
     margin-top: 15px;
 }
-
+.buttons-wrapper {
+    display: flex;
+    gap: 1rem;
+}
 .check-button {
     background: linear-gradient(90.04deg, #25df63 0.03%, #ffc0cb 99.96%);
 }
 .next-button {
     background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+}
+.replay-button {
+    background: linear-gradient(90.04deg, #18cf11 0.03%, #ffc0cb 99.96%);
 }
   .next-btn, .continue-btn, .hide-interactive-btn {
     border-radius: 9px;

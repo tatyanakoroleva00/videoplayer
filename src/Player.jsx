@@ -1,3 +1,5 @@
+// http://localhost:5173/?courseId=1028
+
 import styles from './css/Player.module.css'
 import { useEffect, useRef, useState } from "react";
 import Interactives from './Interactives';
@@ -55,9 +57,7 @@ export default function Player() {
     // то появляется интерактив. Видео ставится на паузу. Идет смещение на 1 секунду вперед, чтобы не было loop-а. 
     useEffect(() => {
         for (let elem of interactivesArr) {
-            let resultTime = convertTime(elem['data']['time_code']);
-
-            console.log(resultTime, 'resTime');
+            let resultTime = convertTime(elem['time_code']);
 
             if (currentTime === resultTime) {
                 setTimeCode(currentTime);
@@ -82,14 +82,14 @@ export default function Player() {
     //Рассчитывание таймкодов в % для линии с тайм-кодами интерактивов. По итогу имеет [15, 25, 55] % . 
     let timeCodes = [];
     for (let elem of interactivesArr) {
-        let resultTime = convertTime(elem['data']['time_code']);
+        let resultTime = convertTime(elem['time_code']);
         let percents = (resultTime + 0.8) / duration * 100;
         timeCodes.push(percents);
     }
 
     //Интерактив показывается по нажатию на точку с интерактивом на панели
     const showInteractive = (index) => {
-        let resultTime = convertTime(interactivesArr[index]['data']['time_code']);
+        let resultTime = convertTime(interactivesArr[index]['time_code']);
         setTimeCode(resultTime);
         setInteractiveIsShown(true);
         player.current.currentTime = resultTime;

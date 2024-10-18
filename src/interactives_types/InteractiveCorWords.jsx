@@ -1,15 +1,14 @@
 import React from 'react'
 import styles from '../css/InteractiveCorWords.module.css';
 import { useState } from 'react';
-export default function InteractiveCorWords({click, interactivesArr, timeCode, fullScreen}) {
+export default function InteractiveCorWords({ click, interactivesArr, timeCode, fullScreen }) {
   const [chosenWords, setChosenWords] = useState({});
-
-  const [checked, setChecked] =  useState(false);
+  const [checked, setChecked] = useState(false);
   const [result, setResult] = useState('');
 
   let data = {};
   for (let elem of interactivesArr) {
-    let episodeTime = elem['data']['time_code'];
+    let episodeTime = elem['time_code'];
     let timeSplitted = episodeTime.split(':');
     let minutes = Math.floor(+timeSplitted[0]);
     let secondsInMinutes = minutes * 60;
@@ -17,23 +16,21 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
     let resultTime = secondsInMinutes + seconds;
 
     if (Math.floor(timeCode) == resultTime) {
-          data = elem['data'];
-      }
+      data = elem;
+    }
   }
 
   let correctWordsData = data['receivedInfo'];
 
   let words = [];
   let correctWordsArr = [];
-  for (let key in correctWordsData) {
-    if (key.includes("word")) {
-      let word = correctWordsData[key]["word_name"];
-      words.push(word);
+  for (let key in correctWordsData['words']) {
+    let word = correctWordsData['words'][key]['word_name'];
+    words.push(word);
 
-      let correctAnswer = correctWordsData[key]["status"];
-      if (correctAnswer === "yes") {
-        correctWordsArr.push(word);
-      }
+    let correctAnswer = correctWordsData['words'][key]['status'];
+    if (correctAnswer === "yes") {
+      correctWordsArr.push(word);
     }
   }
 
@@ -42,7 +39,7 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
       setChosenWords(delete chosenWords[answer]);
     } else {
       let status = !chosenWords.answer;
-      setChosenWords(prev => ({...prev, [answer] : status}));
+      setChosenWords(prev => ({ ...prev, [answer]: status }));
     }
   };
 
@@ -51,37 +48,51 @@ export default function InteractiveCorWords({click, interactivesArr, timeCode, f
     for (let key in chosenWords) {
       chosenWordsArr.push(key);
     }
-    let sortedChosenWordsArr =  chosenWordsArr.sort();
+    let sortedChosenWordsArr = chosenWordsArr.sort();
     let sortedCorrectWordsArr = correctWordsArr.sort();
 
     setChecked(true);
 
-    if(sortedChosenWordsArr.toString() !== sortedCorrectWordsArr.toString()) {
+    if (sortedChosenWordsArr.toString() !== sortedCorrectWordsArr.toString()) {
       setResult('Неверно!');
     } else {
       setResult('Верно!');
     }
   };
 
+  const tryAgainHandler = () => {
+    setChecked(false);
+    setChosenWords({});
+
+  };
+
   return (
     <div className={`${fullScreen ? styles['container-fullscreen'] : styles.container}`}>
       <div className={styles['cor-words-wrapper']}>
-      <div><button className={styles['hide-interactive-btn']} onClick={click}> X </button></div>
-        <h2 className={styles.title}>{correctWordsData.task}</h2>
+        <div><button className={styles['hide-interactive-btn']} onClick={click}> X </button></div>
+        <h2 className={styles.title}>{correctWordsData['task']}</h2>
+
         <ul className={styles['words-box']}>
           {words.map((answer, index) => (
-            <li className={`${chosenWords[answer]? styles.selected : styles.word}`} onClick = {() => {chooseWordHandler(answer)}}
+            <li className={`${chosenWords[answer] ? styles.selected : styles.word}`} onClick={() => { chooseWordHandler(answer) }}
               key={answer + index}>
               {answer}
             </li>
           ))}
         </ul>
-        {!checked && <button onClick={checkResultHandler} className={styles['check-button']}>Проверить</button>}
+
+        {!checked && Object.keys(chosenWords).length !== 0 && <button onClick={checkResultHandler} className={styles['check-button']}>Проверить</button>}
+
         {checked &&
-        <>
-        <p>Результат: {result} </p>
-        <button className={styles['next-button']} onClick={click}>Продолжить</button>
-        </>}
+          <>
+            <p>Результат: {result} </p>
+            <div className={styles['buttons-wrapper']}>
+            
+            <button className={styles['replay-button']} onClick={tryAgainHandler}>Попробовать еще раз</button>
+            <button className={styles['next-button']} onClick={click}>Продолжить</button>
+            </div>
+          </>}
+      
       </div>
     </div>
   )

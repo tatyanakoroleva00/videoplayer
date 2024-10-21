@@ -63,7 +63,7 @@ ul li {
     background: #ffd6ff;
     border: 1px solid #800080;
   }
-  .next-btn, .continue-btn, .hide-interactive-btn {
+  .next-btn, .continue-btn, .hide-interactive-btn, .replay-button {
     border-radius: 9px;
     font-size: 18px;
     color: #ffffff;
@@ -83,11 +83,18 @@ ul li {
   .hide-interactive-btn:hover {
     opacity: 0.9;
   }
-  .next-btn, .continue-btn {
+  .buttons-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+  .next-btn, .continue-btn, .replay-button {
     margin-top: 15px;
     padding: 10px 42px;
     background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
   }
+  .replay-button {
+    background: linear-gradient(90.04deg, #18cf11 0.03%, #ffc0cb 99.96%);
+}
   /* .quiz-container  */
   .next-btn:disabled, .continue-btn:disabled {
     background: #e7e8e9;

@@ -40,10 +40,6 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
 
   const [checkedAnswers, setCheckedAnswers] = useState(answersObjChosen);
 
-
-  
-
-
   function toHide() {
     // //Приведение входящих данных к существующей логике
     // let questionsArr = [];
@@ -187,6 +183,19 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
     }
   };
 
+  const tryAgainHandler = () => {
+    let updatedCheckedAnswersObj = checkedAnswers;
+    for (let key in updatedCheckedAnswersObj) {
+      if(updatedCheckedAnswersObj.hasOwnProperty(key)) {
+        updatedCheckedAnswersObj[key] = false;
+      }
+    }
+    setCheckedAnswers(updatedCheckedAnswersObj);
+    setScore(0);
+    setSelectedAnswers([]);
+    setCurrentQuestion(0);
+    setShowScore(false);
+  };
   return (
 
     <div className={`${fullScreen ? styles['container-fullscreen'] : styles['quiz-container']}`}>
@@ -200,7 +209,10 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
           <p>
             Итог:<span> {score} / {maxScore}</span>
           </p>
-          <button className={styles['continue-btn']} onClick={click}>Продолжить</button>
+          <div className={styles['buttons-wrapper']}>
+            <button className={styles['replay-button']} onClick={tryAgainHandler}>Попробовать еще раз</button>
+            <button className={styles['continue-btn']} onClick={click}>Продолжить</button>
+            </div>
         </div>
       ) : (
         <>
@@ -217,7 +229,6 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
                   <input className={styles['checkbox-invisible']}
                     type="checkbox"
                     checked={selectedAnswers.includes(index)}
-                    // onChange={() => handleAnswerToggle(index, answerOption)}
                   />
                   {answerOption.name}
                 </label>
@@ -226,7 +237,7 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
           </ul>
 
           <div className={styles["flex-right"]}>
-            <button className={styles['next-btn']} onClick={handleNextQuestion} disabled={selectedAnswers.length === 0}> {currentQuestion === questions.length - 1 ? 'Завершить' : 'Далее'}
+            <button className={styles['next-btn']} onClick={handleNextQuestion} disabled={selectedAnswers.length === 0}> {currentQuestion === questions.length - 1 ? 'Проверить' : 'Далее'}
             </button>
           </div>
         </>)}

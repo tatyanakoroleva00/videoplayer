@@ -24,11 +24,16 @@ export default function Player() {
         })
             .then(response => response.json())
             .then(data => {
-                setVideoData(data);
-                setInteractivesArr(data.interactives);
-            })
-    }, [])
 
+                setVideoData(data);
+                let interactives = data['interactives'];
+                for (let i = 0; i < interactives.length; i++) {
+                    if(interactives[i]['receivedInfo'].length === 0) {
+                        interactives.splice(i, 1);
+                    }
+                setInteractivesArr(data.interactives);
+            }})
+    }, [])
     //Определяем длину видео
     useEffect(() => {
         if (!player) return;

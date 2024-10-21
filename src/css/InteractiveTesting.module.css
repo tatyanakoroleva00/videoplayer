@@ -23,7 +23,7 @@
 .active-question-no {
     font-size: 32px;
     font-weight: 500;
-    color: #800080;
+    color: #80008027;
 }
 
 .hide-interactive {
@@ -32,17 +32,10 @@
     top: 1rem;
     background-color: gray;
   }
-  
+
 .total-question {
-    /* font-weight: 500; */
     color: #e0dee3;
   }
-  
-/* h2 {
-    font-weight: 500;
-    font-size: 18px;
-    margin: 0;
-  } */
   
 ul {
     margin-top: 20px;
@@ -56,12 +49,17 @@ ul li {
     background: #ffffff;
     border: 1px solid #eaeaea;
     border-radius: 16px;
-    padding: 7px;
+    padding: 10px 15px;
     margin-top: 15px;
     cursor: pointer;
+    z-index: 9999;
   }
-  
-ul .selected-answer {
+
+  .checkbox-invisible {
+    opacity: 0;
+    display: none;
+  }
+  .checkbox-checked {
     background: #ffd6ff;
     border: 1px solid #800080;
   }

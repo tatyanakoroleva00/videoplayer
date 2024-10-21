@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from '../css/InteractiveTesting.module.css';
 
 export default function InteractiveTesting({ click, timeCode, interactivesArr, fullScreen }) {
+  
   let data = {}; //тут находится интерактив
 
   for (let elem of interactivesArr) {
@@ -29,7 +30,18 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
     questions.push(questionObject);
   }
 
-  console.log(questions, 'questions');
+  let answersObjChosen = {};
+  for (let elem in questions) {
+    let question = questions[elem]['answerOptions'];
+    for (let answer of question) {
+      answersObjChosen[answer['id']] = false;
+    }
+  }
+
+  const [checkedAnswers, setCheckedAnswers] = useState(answersObjChosen);
+
+
+  
 
 
   function toHide() {
@@ -138,7 +150,10 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
   const [showScore, setShowScore] = useState(false);
   const maxScore = 5 * questions.length;
 
-  const handleAnswerToggle = (index) => {
+  const handleAnswerToggle = (index, answerOption) => {
+    let id = answerOption['id'];
+    
+    setCheckedAnswers(prev => ({...prev, [id] : !checkedAnswers[id]}));
     setSelectedAnswers((prevSelected) => {
       if (prevSelected.includes(index)) {
         return prevSelected.filter((i) => i !== index);
@@ -147,6 +162,9 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
       }
     });
   };
+
+  console.log(checkedAnswers, 'checkedAnswers');
+  console.log(selectedAnswers, 'selected');
 
   const handleNextQuestion = () => {
     const correctAnswers = questions[currentQuestion].answerOptions
@@ -194,12 +212,12 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
           </div>
           <ul className='answer-section'>
             {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-              <li key={index}>
+              <li key={index} className={`${checkedAnswers[answerOption['id']] === true && styles['checkbox-checked']}`} onClick={() => handleAnswerToggle(index, answerOption)}>
                 <label>
-                  <input
+                  <input className={styles['checkbox-invisible']}
                     type="checkbox"
                     checked={selectedAnswers.includes(index)}
-                    onChange={() => handleAnswerToggle(index)}
+                    // onChange={() => handleAnswerToggle(index, answerOption)}
                   />
                   {answerOption.name}
                 </label>

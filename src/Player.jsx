@@ -154,7 +154,7 @@ export default function Player() {
                     <video className={interactiveIsShown ? styles['video-with-interactive'] : styles['video-without-interactives']} id="videoPlayer" onTimeUpdate={timeUpdateHandler} src={videoData['url']}
                         ref={player} preload='auto' controlsList='nodownload' controls />
                 </div>
-                {currentTime === 0 && !interactiveIsShown && showPoster && <div className={styles.cover}>
+                {currentTime === 0 && !interactiveIsShown && <div className={styles.cover}>
                     <p>{videoData.heading}</p></div>
                 }
                 <div className={styles['toggle-btn-wrapper']}>

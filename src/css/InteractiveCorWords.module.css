@@ -4,19 +4,20 @@
     height: 100%;
     background: #ffffff;
     border-radius: 4px;
-    /* padding: 20px 30px; */
     padding: 30px 60px;
-    /* display: flex; */
     position: absolute;
+    overflow: auto;
 }
 .container-fullscreen {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+    height: 99%;
     background: #ffffff;
     border-radius: 4px;
     padding: 15% 30%;
     position: absolute;
+    overflow: auto;
 }
 .cor-words-wrapper {
     margin: 0 auto;

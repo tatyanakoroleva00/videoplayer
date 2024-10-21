@@ -20,7 +20,7 @@ export default function InteractiveExtLink({fullScreen, click, interactivesArr, 
         <div className={`${fullScreen ? styles['container-fullscreen'] : styles.container}`} >
             <div className={styles['external-link-wrapper']}>
                 <h2 className={styles['link-description']}>{data['receivedInfo']['external_source_link_description']}</h2>
-                <p className={styles['weblink']}><a target="_blank" href={data['receivedInfo']['external_source_url']}>{data['receivedInfo']['external_source_url']}</a></p>
+                <div className={styles['weblink-container']}><p className={styles['weblink']}><a target="_blank" href={data['receivedInfo']['external_source_url']}>{data['receivedInfo']['external_source_url']}</a></p></div>
                 <button className={styles['next-button']} onClick={click}>Продолжить</button>
             </div>
         </div>

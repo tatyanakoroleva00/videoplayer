@@ -6,15 +6,17 @@
     border-radius: 4px;
     padding: 30px 60px;
     position: absolute;
+    overflow: auto;
 }
 .container-fullscreen {
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
+    height: 99%;
     background: #ffffff;
     border-radius: 4px;
     padding: 15% 25%;
     position: absolute;
+    overflow: auto;
 }
 .external-link-wrapper {
     margin: 0 auto;
@@ -33,6 +35,7 @@
 
 .weblink {
     font-size: 1.2rem;
+    word-break: break-all;
 }
 
 h2 {

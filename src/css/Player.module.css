@@ -17,6 +17,8 @@ video {
     background-color: black;
 }
 
+
+
 video::-webkit-media-controls-panel {
     display: flex !important;
     opacity: 1 !important;
@@ -38,7 +40,6 @@ video::-webkit-media-controls-return-to-realtime-button {
     display: flex !important;
     opacity: 1 !important;
 }
-
 .video-with-interactive::-webkit-media-controls-panel {
     background-color: rgb(255, 255, 255);
 }

@@ -141,6 +141,9 @@ export default function Player() {
                 setInteractiveIsShown(false);
             };
         }
+
+       
+        vid.disablePictureInPicture = true;
     }
 
     

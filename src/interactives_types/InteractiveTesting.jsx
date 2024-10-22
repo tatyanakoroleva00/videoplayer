@@ -40,106 +40,6 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
 
   const [checkedAnswers, setCheckedAnswers] = useState(answersObjChosen);
 
-  function toHide() {
-    // //Приведение входящих данных к существующей логике
-    // let questionsArr = [];
-
-
-
-    // for (let key in testing['questions']) {
-
-    //   let questionObj = {};
-    //   let answersArr = [];
-    //   let correctAnswers = [];
-
-
-
-
-
-
-
-    //   for (let internalKey in testing['questions'][key]) {
-
-    //     let testingInteractive = testing['questions'][key];
-
-    //     if (internalKey === 'question_name') {
-    //       let questionName = testing['questions'][key][internalKey];
-    //       questionObj['question_name'] = questionName;
-    //     }
-
-    //     if (internalKey === 'answers') {
-    //       for (let answer of testingInteractive[internalKey]) {
-    //         answersArr.push(answer['name']);
-
-    //         if (answer['status'] === true) {
-    //           correctAnswers.push(answer['name'])
-    //         }
-    //       }
-    //     }
-    //     questionObj.choices = answersArr;
-    //     questionObj['correctAnswer'] = correctAnswers;
-    //     questionsArr.push(questionObj);
-    //   }
-    // }
-
-    // console.log(questionsArr, 'questionsArr');
-
-    // let totalQuestionsNumber = questionsArr.length;
-
-    // const quiz = {
-    //   questions: questionsArr,
-    //   totalQuestions: totalQuestionsNumber,
-    //   perQuestionScore: 5,
-    // };
-
-
-    // const [activeQuestion, setActiveQuestion] = useState(0)
-    // const [selectedAnswer, setSelectedAnswer] = useState('')
-    // const [showResult, setShowResult] = useState(false)
-    // const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null)
-    // const [result, setResult] = useState({
-    //   score: 0,
-    //   correctAnswers: 0,
-    //   wrongAnswers: 0,
-    // });
-
-    // const { questions } = quiz;
-    // const { question_name, choices, correctAnswer } = questions[activeQuestion];
-
-    // const onClickNext = () => {
-    //   setSelectedAnswerIndex(null)
-    //   setResult((prev) =>
-    //     selectedAnswer
-    //       ? {
-    //         ...prev,
-    //         score: prev.score + 5,
-    //         correctAnswers: prev.correctAnswers + 1,
-    //       }
-    //       : { ...prev, wrongAnswers: prev.wrongAnswers + 1 }
-    //   )
-    //   if (activeQuestion !== questions.length - 1) {
-    //     setActiveQuestion((prev) => prev + 1)
-    //   } else {
-    //     setActiveQuestion(0)
-    //     setShowResult(true)
-    //   }
-    // };
-
-    // const onAnswerSelected = (answer, index) => {
-    //   setSelectedAnswerIndex(index);
-    //   let chosenAnswer = index + 1;
-
-
-    //   if (chosenAnswer === Math.floor(correctAnswer)) {
-    //     setSelectedAnswer(true)
-    //   } else {
-    //     setSelectedAnswer(false)
-    //   }
-    // };
-
-    // const addLeadingZero = (number) => (number > 9 ? number : `0${number}`);
-  }
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [score, setScore] = useState(0);
@@ -158,9 +58,6 @@ export default function InteractiveTesting({ click, timeCode, interactivesArr, f
       }
     });
   };
-
-  console.log(checkedAnswers, 'checkedAnswers');
-  console.log(selectedAnswers, 'selected');
 
   const handleNextQuestion = () => {
     const correctAnswers = questions[currentQuestion].answerOptions

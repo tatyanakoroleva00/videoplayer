@@ -120,9 +120,7 @@ export default function Player() {
         //Выход из fullscreen по нажатию на кнопку Escape, реагирование на смену режимов экрана. 
         document.addEventListener('fullscreenchange', function () {
             if (document.fullscreenElement) {
-                // console.log('Видео вошло в полноэкранный режима');
             } else {
-                // console.log('Видео вышло из полноэкранного режима');
                 setFullScreen(false);
             }
         }, false);
@@ -142,11 +140,9 @@ export default function Player() {
             };
         }
 
-       
         vid.disablePictureInPicture = true;
     }
 
-    
     return (
         <>
             <div className={styles.container} id="video-container" >

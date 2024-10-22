@@ -27,12 +27,10 @@ export default function Player() {
 
                 setVideoData(data);
                 let interactives = data['interactives'];
-                for (let i = 0; i < interactives.length; i++) {
-                    if(interactives[i]['receivedInfo'].length === 0) {
-                        interactives.splice(i, 1);
-                    }
-                setInteractivesArr(data.interactives);
-            }})
+
+                const filteredData = interactives.filter(item => !(Array.isArray(item.receivedInfo) && item.receivedInfo.length === 0));
+                setInteractivesArr(filteredData);
+            })
     }, [])
     //Определяем длину видео
     useEffect(() => {
